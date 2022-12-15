@@ -1,0 +1,14 @@
+@import "../../../styles/app.scss";
+
+.favorite-input {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  width: calc(100% - 65px);
+  background-color: $base-color;
+  border-color: white;
+  height: 50px;
+  border-radius: 20px;
+  color: white;
+  padding-left: 20px;
+}

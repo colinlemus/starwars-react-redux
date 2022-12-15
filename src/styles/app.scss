@@ -1,11 +1,15 @@
+$base-color: #17141F; 
+
 .title-text {
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
-  top: -40px;
+  font-size: 20px;
+  z-index: 0;
+  top: -42px;
 }
 
 body {
-  background-color: #17141F;
+  background-color: $base-color;
 }

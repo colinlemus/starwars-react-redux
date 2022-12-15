@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Hamburger from '../Hamburger';
 import Character from '../Characters/Character';
+import "../Characters/styles/characters.scss";
 
 class MainFavoritesApp extends Component {
   constructor(props) {
@@ -40,7 +41,7 @@ class MainFavoritesApp extends Component {
   }
 
   render() {
-    let loading = !this.state.loading ? this.state.characterData < 1 ? (<div>Please add some favorites!</div>) : (<Character characterData={this.state.characterData} favorite={true} />) : (<div>Loading...</div>);
+    let loading = !this.state.loading ? this.state.characterData < 1 ? (<div>Please add some favorites!</div>) : (<Character characterData={this.state.characterData} favoriteData={this.props.data.favorite} favorite={true} />) : (<div>Loading...</div>);
 
     return (
       <div className='container'>

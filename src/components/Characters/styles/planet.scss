@@ -1,0 +1,14 @@
+.planet-container {
+  display: flex;
+  justify-content: center;
+
+  .planet-image {
+    width: "25px";
+    height: "25px";
+  }
+
+  .planet-name {
+    display: flex;
+    align-items: center;
+  }
+}

@@ -10,7 +10,7 @@ export const characterSlice = createSlice({
   initialState,
   reducers: {
     getCharacterData: (state, action) => {
-      console.log(action.payload)
+      //where data lives
       state.value = action.payload;
     },
   }, 
