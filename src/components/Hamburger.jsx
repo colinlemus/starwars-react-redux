@@ -2,6 +2,9 @@ import "../styles/hamburgers.scss";
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 
+// This is the Hamburger component. It is a functional
+// component that uses the useState hook from React.
+// It is used to toggle the hamburger menu.
 const Hamburger = () => {
   const [hamburgerStatus, setHamburgerStatus] = useState(false);
 

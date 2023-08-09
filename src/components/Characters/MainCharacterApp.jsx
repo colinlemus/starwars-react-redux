@@ -6,6 +6,9 @@ import "../../styles/app.scss";
 import "./styles/characters.scss";
 import Character from './Character';
 
+// This is the main component for the Characters page. It is a 
+// functional component that uses the connect function from react-redux 
+// to connect to the store.
 function MainCharacterApp(props) {
   return (
     <div className='container'>
