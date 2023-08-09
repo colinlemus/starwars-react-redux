@@ -9,7 +9,6 @@ function Character(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log(props.data.character.status);
     switch (props.data.character.status) {
       case 'pending':
         console.log('pending');

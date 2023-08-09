@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Planet from '../Characters/Planet';
 import { useDispatch } from 'react-redux';
 import { toggleFavorite } from '../../redux/features/favoriteSlice';
