@@ -5,6 +5,9 @@ import { toggleFavorite } from '../../redux/features/favoriteSlice';
 import heartFilled from '../../assets/images/heart-filled.png';
 import heartEmpty from '../../assets/images/heart-empty.png'
 
+// This is the Favorite component. It is a functional
+// component that uses the useDispatch function from react-redux
+// to dispatch the toggleFavorite action.
 const Favorite = (props) => {
   const dispatch = useDispatch();
 
