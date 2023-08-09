@@ -10,10 +10,12 @@ const AppRoutes = () => {
   const characters = useSelector(state => state.character.characters);
   const planetCache = useSelector(state => state.character.planetCache);
   
+  // This is the initial fetch of the character data.
   useEffect(() => {
     dispatch(fetchCharacters());
   }, [dispatch]);
 
+  // This is the fetch of the planet data.
   useEffect(() => {
     if (!characters || !planetCache) return;
 
@@ -24,6 +26,7 @@ const AppRoutes = () => {
     });
   }, [characters, planetCache, dispatch]);
 
+  // This is the routing for the app.
   let routes = useRoutes([
     { path: "/", element: <Navigate to="/characters" /> },
     { path: "/characters", element: <MainCharacterApp /> },

@@ -8,6 +8,7 @@ function Character(props) {
   const [nameValue, setNameValue] = useState("");
   const [loading, setLoading] = useState(true);
 
+  // This useEffect is used to set the characterData state to the data from the API call in Redux.
   useEffect(() => {
     switch (props.data.character.status) {
       case 'pending':
@@ -41,6 +42,9 @@ function Character(props) {
     setNameValue(event.target.value);
   }
 
+  // This is a ternary operator that checks if the loading state is true or false. 
+  // If it is true, it will display a loading message. If it is false, it will display 
+  // the characterData state.
   let loadingCharacters = !loading ? (<>{characterData.map((e, i) =>
     e.name.toLowerCase().indexOf(nameValue.toLowerCase()) > -1 && props.favorite ? (
       <Favorite key={i} character={e} favoriteData={props.data.favorite} />) : nameValue === "" ? (<Favorite key={i} character={e} favoriteData={props.data.favorite} />) : ('')

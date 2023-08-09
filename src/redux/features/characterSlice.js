@@ -2,11 +2,11 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
 
 const initialState = {
-  value: 0,
   status: 'idle',
   planetCache: {},
 };
 
+// This is a thunk that fetches the character data.
 export const fetchCharacters = createAsyncThunk(
   'characters/fetchCharacters',
   async () => {
@@ -16,6 +16,8 @@ export const fetchCharacters = createAsyncThunk(
   }
 );
 
+// This is a thunk that fetches the planet data.
+// It also checks the cache to see if the data has already been fetched.
 export const fetchPlanet = createAsyncThunk(
   'characters/fetchPlanet',
   async (planetURL, { getState, signal }) => {
@@ -49,6 +51,8 @@ export const fetchPlanet = createAsyncThunk(
   }
 );
 
+// This is the slice that handles the character data.
+// It also handles the planet data, which is stored in a cache.
 export const characterSlice = createSlice({
   name: 'character',
   initialState,

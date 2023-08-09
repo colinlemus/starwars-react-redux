@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Planet from '../Characters/Planet';
 import { useDispatch } from 'react-redux';
 import { toggleFavorite } from '../../redux/features/favoriteSlice';
@@ -14,7 +14,7 @@ const Favorite = (props) => {
     <div className='character-container'>
         <div className='character-name'>{props.character.name}</div>
         <div className='character-gender'>{props.character.gender.includes("n/a") ? (<>n/a</>) : props.character.gender[0].toUpperCase() + props.character.gender.substring(1).toLowerCase()} | {props.character.birth_year}</div>
-        <div className='character-planet'><Planet characterData={props.character}/></div>
+        <div className='character-planet'><Planet homeworld={props.character.homeworld}/></div>
         <button className='character-favorite' onClick={() => { console.log(props.favoriteData) 
           dispatch(toggleFavorite(props.character, props.favoriteData))} }>
           {favoritedCharacters.length === 0 ? (<img src={heartEmpty} width="20px" height="20px" />) : 
