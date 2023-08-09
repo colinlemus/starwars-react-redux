@@ -10,6 +10,7 @@ function Character(props) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    console.log(props.data.character.status);
     switch (props.data.character.status) {
       case 'pending':
         console.log('pending');
@@ -20,7 +21,7 @@ function Character(props) {
       case 'fulfilled':
         if (props.data) {
           console.log('fulfilled');
-          setCharacterData(props.data.character.value);
+          setCharacterData(props.data.character.characters);
         }
         break;
       default:
@@ -29,8 +30,7 @@ function Character(props) {
   }, [props.data.character.status]);
 
   useEffect(() => {
-    if(characterData.length > 0) {
-      console.log(characterData)
+    if (characterData.length > 0) {
       setLoading(false);
     }
   }, [characterData]);
