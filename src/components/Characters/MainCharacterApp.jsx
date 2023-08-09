@@ -1,6 +1,6 @@
 
-import { React, useState, useEffect } from 'react';
-import { connect, useSelector } from 'react-redux';
+import { React } from 'react';
+import { connect } from 'react-redux';
 import Hamburger from '../Hamburger';
 import "../../styles/app.scss";
 import "./styles/characters.scss";

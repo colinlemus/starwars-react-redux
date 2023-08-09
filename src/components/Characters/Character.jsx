@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Favorite from '../Favorites/Favorite';
 import { connect } from 'react-redux';

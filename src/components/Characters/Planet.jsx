@@ -1,39 +1,34 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import "./styles/planet.scss"
 import pinImage from '../../assets/images/pin.png';
 
-export default function Planet(props) {
+function Planet(props) {
   const [planetName, setPlanetName] = useState("");
   const [loading, setLoading] = useState(true);
-  const planetCache = new Map();
-
-  //TODO:
-  //collect list of planets all 1 call and add to hashmap
-  //use hashmap to get planet name
 
   useEffect(() => {
-    console.log(planetCache);
-    if (planetCache.has(props.characterData.homeworld)) {
-      setPlanetName(planetCache.get(props.characterData.homeworld));
-      setLoading(false);
-    } else {
-      axios.get(props.characterData.homeworld)
-        .then(data => {
-          setPlanetName(data.data.name);
-          setLoading(false);
-          // Save data to cache
-          planetCache.set(props.characterData.homeworld, data.data.name);
-        })
-    }
-  }, []); 
+    const planetURL = props.characterData.homeworld;
 
-  let loadingPlanet = loading ? (<>Loading Planet...</>) : (planetName);
+    if (props.data.character.planetCache && props.data.character.planetCache[planetURL]) {
+      setPlanetName(props.data.character.planetCache[planetURL].name);
+    } else {
+      setPlanetName("Loading Planet...");
+    }
+  }, [props.characterData.homeworld, props.data.character.planetCache]);
 
   return (
     <div className="planet-container" >
       <img src={pinImage} className="planet-image" width={"30px"} />
-      <span className="planet-name">{loadingPlanet}</span>
+      <span className="planet-name">{planetName}</span>
     </div>
   )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    data: state
+  }
+};
+
+export default connect(mapStateToProps)(Planet)
