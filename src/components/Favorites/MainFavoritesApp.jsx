@@ -32,7 +32,7 @@ const MainFavoritesApp = (props) => {
     }
   }, []);
 
-  const loadingFavorites = !loading ? characterData < 1 ? (<div>Please add some favorites!</div>) : (<Character characterData={characterData} favoriteData={props.data.favorite} favorite={true} />) : (<div>Loading...</div>);
+  const loadingFavorites = !loading ? characterData < 1 ? (<div>Please add some favorites!</div>) : (<Character favoriteData={props.data.favorite} favorite={true} />) : (<div>Loading...</div>);
 
   return (
     <div className='container'>

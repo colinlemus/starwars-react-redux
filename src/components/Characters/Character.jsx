@@ -21,7 +21,11 @@ function Character(props) {
       case 'fulfilled':
         if (props.data) {
           console.log('fulfilled');
-          setCharacterData(props.data.character.characters);
+          if(props.favorite) {
+            setCharacterData(props.data.favorite.value);
+          } else {
+            setCharacterData(props.data.character.characters);
+          }
         }
         break;
       default:

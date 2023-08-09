@@ -20,7 +20,6 @@ export const characterSlice = createSlice({
   initialState,
   reducers: {
     getCharacterData: (state, action) => {
-      //where data lives
       state.value = action.payload;
     },
   },
