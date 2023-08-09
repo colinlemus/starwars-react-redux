@@ -1,66 +1,56 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Hamburger from '../Hamburger';
 import Character from '../Characters/Character';
 import "../Characters/styles/characters.scss";
 
-class MainFavoritesApp extends Component {
-  constructor(props) {
-    super(props);
+const MainFavoritesApp = (props) => {
+  const [characterData, setCharacterData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    this.state = {
-      characterData: [],
-      nameValue: "",
-      loading: true,
-    }
-  }
-
-  handleChange = (event) => {
-    this.setState({nameValue: event.target.value});
-  }
-
-  componentDidMount = () => {
-    console.log(this.props.data);
-    if(this.props.data.favorite.value.length < 1) {
+  useEffect(() => {
+    console.log(props.data);
+    if (props.data.favorite.value.length < 1) {
       setTimeout(() => {
-        if(this.props.data.favorite.value) {
-          if(this.state.loading) {
-            this.setState({ characterData: this.props.data.favorite.value, loading: false });
+        if (props.data.favorite.value) {
+          if (loading) {
+            setCharacterData(props.data.favorite.value);
+            setLoading(false);
           }
         } else {
-          if(this.state.loading) {
-            this.setState({ characterData: [], loading: false });
+          if (loading) {
+            setCharacterData([]);
+            setLoading(false);
           }
         }
       }, 5000);
     } else {
-      if(this.state.loading) {
-        this.setState({ characterData: this.props.data.favorite.value, loading: false });
+      if (loading) {
+        setCharacterData(props.data.favorite.value);
+        setLoading(false);
       }
     }
-  }
+  }, []);
 
-  render() {
-    let loading = !this.state.loading ? this.state.characterData < 1 ? (<div>Please add some favorites!</div>) : (<Character characterData={this.state.characterData} favoriteData={this.props.data.favorite} favorite={true} />) : (<div>Loading...</div>);
+  const loadingFavorites = !loading ? characterData < 1 ? (<div>Please add some favorites!</div>) : (<Character favoriteData={props.data.favorite} favorite={true} />) : (<div>Loading...</div>);
 
-    return (
-      <div className='container'>
-        <div className='row'>
-          <div className='col-12'>
-            <Hamburger />
-          </div>
-          <div className='col-12 text-center title-text'>
-            Favorites
-          </div>
+  return (
+    <div className='container'>
+      <div className='row'>
+        <div className='col-12'>
+          <Hamburger />
         </div>
-        <div className='row'>
-          <div className='col-12' style={{ position: 'relative', left: '20px' }}>
-            {loading}
-          </div>
+        <div className='col-12 text-center title-text'>
+          Favorites
         </div>
       </div>
-    )
-  }
+      <div className='row'>
+        <div className='col-12' style={{ position: 'relative', left: '20px' }}>
+          {loadingFavorites}
+        </div>
+      </div>
+    </div>
+  )
 }
 
 const mapStateToProps = (state) => {
@@ -69,4 +59,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(MainFavoritesApp)
+export default connect(mapStateToProps)(MainFavoritesApp);

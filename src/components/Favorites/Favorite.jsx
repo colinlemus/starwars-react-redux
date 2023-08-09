@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import Planet from '../Characters/Planet';
 import { useDispatch } from 'react-redux';
-import { toggleFavorite } from '../../redux/features/favorite/favoriteAPI';
+import { toggleFavorite } from '../../redux/features/favoriteSlice';
 import heartFilled from '../../assets/images/heart-filled.png';
 import heartEmpty from '../../assets/images/heart-empty.png'
 

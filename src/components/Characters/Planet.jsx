@@ -1,31 +1,34 @@
-import axios from 'axios';
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import "./styles/planet.scss"
 import pinImage from '../../assets/images/pin.png';
 
-export default class Planet extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      planetName: "",
-      loading: true
+function Planet(props) {
+  const [planetName, setPlanetName] = useState("");
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const planetURL = props.characterData.homeworld;
+
+    if (props.data.character.planetCache && props.data.character.planetCache[planetURL]) {
+      setPlanetName(props.data.character.planetCache[planetURL].name);
+    } else {
+      setPlanetName("Loading Planet...");
     }
-  }
+  }, [props.characterData.homeworld, props.data.character.planetCache]);
 
-  componentDidMount = () => {
-    axios.get(this.props.characterData.homeworld)
-      .then(data => {
-        this.setState({ planetName: data.data.name, loading: false })
-      })
-  }
-
-  render() {
-    let loading = this.state.loading ? (<>Loading Planet...</>) : (this.state.planetName);
-    return (
-      <div className="planet-container" >
-        <img src={pinImage} className="planet-image" width={"30px"} />
-        <span className="planet-name">{loading}</span>
-      </div>
-    )
-  }
+  return (
+    <div className="planet-container" >
+      <img src={pinImage} className="planet-image" width={"30px"} />
+      <span className="planet-name">{planetName}</span>
+    </div>
+  )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    data: state
+  }
+};
+
+export default connect(mapStateToProps)(Planet)
