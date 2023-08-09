@@ -5,7 +5,6 @@ import pinImage from '../../assets/images/pin.png';
 
 function Planet(props) {
   const [planetName, setPlanetName] = useState("");
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const planetURL = props.characterData.homeworld;
