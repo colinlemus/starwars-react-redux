@@ -8,7 +8,9 @@ import { fetchCharacters } from './redux/features/character/characterSlice';
 const AppRoutes = () => {
   const dispatch = useDispatch();
   
-  dispatch(fetchCharacters());
+  useEffect(() => {
+    dispatch(fetchCharacters());
+  }, [dispatch]);
 
   let routes = useRoutes([
     { path: "/", element: <Navigate to="/characters" /> },

@@ -7,48 +7,6 @@ import "./styles/characters.scss";
 import Character from './Character';
 
 function MainCharacterApp(props) {
-  const [characterData, setCharacterData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    console.log(props.data);
-    if (props.data.character.status === 'pending') {
-      console.log('pending');
-    }
-  
-    if (props.data.character.status === 'rejected') {
-      console.log('rejected');
-    }
-  
-    if (props.data.character.status === 'fulfilled' && props.data) {
-      console.log('fulfilled');
-      setCharacterData(props.data.character.value);
-      setLoading(false);
-      console.log(loading);
-    }
-
-    // if (!props.data.character.value) {
-    //   let check = setInterval(() => {
-    //     console.log(props.data.character);
-    //     if (props.data.character.value) {
-    //       if (loading) {
-    //         setCharacterData(props.data.character.value);
-    //         setLoading(false);
-    //       }
-
-    //       clearInterval(check);
-    //     }
-    //   }, 5000);
-    // } else {
-    //   if (loading) {
-    //     setCharacterData(props.data.character.value);
-    //     setLoading(false);
-    //   }
-    // }
-  }, [props.data.character.status]);
-
-  let loadingCharacters = !loading ? (<Character characterData={characterData} favoriteData={props.data.favorite} />) : (<div>Loading...</div>);
-
   return (
     <div className='container'>
       <div className='row'>
@@ -61,7 +19,7 @@ function MainCharacterApp(props) {
       </div>
       <div className='row'>
         <div className='col-12' style={{ position: 'relative', left: '20px' }}>
-          {loadingCharacters}
+          <Character favoriteData={props.data.favorite} />
         </div>
       </div>
     </div>

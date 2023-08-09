@@ -7,14 +7,42 @@ import "../Favorites/styles/favorites.scss"
 function Character(props) {
   const [characterData, setCharacterData] = useState([]);
   const [nameValue, setNameValue] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    setCharacterData(props.characterData);
-  }, []);
+    switch (props.data.character.status) {
+      case 'pending':
+        console.log('pending');
+        break;
+      case 'rejected':
+        console.log('rejected');
+        break;
+      case 'fulfilled':
+        if (props.data) {
+          console.log('fulfilled');
+          setCharacterData(props.data.character.value);
+        }
+        break;
+      default:
+        break;
+    }
+  }, [props.data.character.status]);
+
+  useEffect(() => {
+    if(characterData.length > 0) {
+      console.log(characterData)
+      setLoading(false);
+    }
+  }, [characterData]);
 
   const handleChange = (event) => {
     setNameValue(event.target.value);
   }
+
+  let loadingCharacters = !loading ? (<>{characterData.map((e, i) =>
+    e.name.toLowerCase().indexOf(nameValue.toLowerCase()) > -1 && props.favorite ? (
+      <Favorite key={i} character={e} favoriteData={props.data.favorite} />) : nameValue === "" ? (<Favorite key={i} character={e} favoriteData={props.data.favorite} />) : ('')
+  )}</>) : (<div>Loading...</div>);
 
   return (
     <div>
@@ -27,10 +55,7 @@ function Character(props) {
           </label>
         </form>
       </div>) : ('')}
-      {characterData.map((e, i) =>
-        e.name.toLowerCase().indexOf(nameValue.toLowerCase()) > -1 && props.favorite ? (
-          <Favorite key={i} character={e} favoriteData={props.data.favorite} />) : nameValue === "" ? (<Favorite key={i} character={e} favoriteData={props.data.favorite} />) : ('')
-      )}
+      {loadingCharacters}
     </div>
   )
 }
